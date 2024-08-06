@@ -3,6 +3,7 @@
         "objeto.h": "c",
         "tela.h": "c",
         "algebra.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "sdl.h": "c"
     }
 }
