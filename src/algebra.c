@@ -1,18 +1,24 @@
 #include <stdio.h>
 #include <stdlib.h>
 // Ajusta valores de um matriz 4d para uma matriz identidade
-void criaIdentidade4d(float **novaMatriz)
+float **criaIdentidade4d()
 {
+    float **matriz = (float **)malloc(4 * sizeof(float *));
+
+    for (int i = 0; i < 4; i++)
+        matriz[i] = (float *)malloc(4 * sizeof(float));
+
     for (int i = 0; i < 4; i++)
     {
         for (int j = 0; j < 4; j++)
         {
             if (i == j)
-                novaMatriz[i][j] = 1.0;
+                matriz[i][j] = 1.0;
             else
-                novaMatriz[i][j] = 0.0;
+                matriz[i][j] = 0.0;
         }
     }
+    return matriz;
 }
 
 // Imprime uma matriz 4d no terminal
@@ -21,9 +27,7 @@ void imprimeMatriz4dDBG(float **matriz)
     for (int i = 0; i < 4; i++)
     {
         for (int j = 0; j < 4; j++)
-        {
             printf("%8.4f ", matriz[i][j]);
-        }
         printf("\n");
     }
 }
@@ -40,9 +44,7 @@ float *multMatriz4dPonto(float **matriz, float *ponto)
     {
         resultado[i] = 0.0;
         for (int j = 0; j < 4; j++)
-        {
             resultado[i] += matriz[i][j] * ponto[j];
-        }
     }
 
     return resultado;
@@ -67,8 +69,6 @@ void multMatriz4d(float **matrizA, float **matrizB)
     for (int i = 0; i < 4; i++)
     {
         for (int j = 0; j < 4; j++)
-        {
             matrizB[i][j] = matrizC[i][j];
-        }
     }
 }
