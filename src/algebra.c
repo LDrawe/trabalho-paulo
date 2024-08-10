@@ -6,18 +6,11 @@ float **criaIdentidade4d()
     float **matriz = (float **)malloc(4 * sizeof(float *));
 
     for (int i = 0; i < 4; i++)
-        matriz[i] = (float *)malloc(4 * sizeof(float));
-
-    for (int i = 0; i < 4; i++)
     {
-        for (int j = 0; j < 4; j++)
-        {
-            if (i == j)
-                matriz[i][j] = 1.0;
-            else
-                matriz[i][j] = 0.0;
-        }
+        matriz[i] = (float *)calloc(4, sizeof(float));
+        matriz[i][i] = 1.0;
     }
+
     return matriz;
 }
 

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include "objeto.h"
+#include "algebra.h"
 
 // Lê as informações de um arquivo e as carrega num novo objeto alocado
 tObjeto3d *carregaObjeto(const char *nomeArquivo)
@@ -22,8 +23,9 @@ tObjeto3d *carregaObjeto(const char *nomeArquivo)
 
     for (int i = 0; i < novoObjeto->nPontos; i++)
     {
-        novoObjeto->pontos[i] = (float *)malloc(3 * sizeof(float));
+        novoObjeto->pontos[i] = (float *)malloc(4 * sizeof(float));
         fscanf(arquivoObj, "%f %f %f", &(novoObjeto->pontos[i][0]), &(novoObjeto->pontos[i][1]), &(novoObjeto->pontos[i][2]));
+        novoObjeto->pontos[i][3] = 1;
     }
 
     fscanf(arquivoObj, "%d", &(novoObjeto->nArestas));
@@ -35,17 +37,7 @@ tObjeto3d *carregaObjeto(const char *nomeArquivo)
         fscanf(arquivoObj, "%d %d", &(novoObjeto->arestas[i][0]), &(novoObjeto->arestas[i][1]));
     }
 
-    novoObjeto->modelMatrix = (float **)malloc(4 * sizeof(float *));
-
-    for (int i = 0; i < 4; i++)
-    {
-        novoObjeto->modelMatrix[i] = (float *)malloc(4 * sizeof(float));
-        for (int j = 0; j < 4; j++)
-            if (i == j)
-                novoObjeto->modelMatrix[i][j] = 1.0;
-            else
-                novoObjeto->modelMatrix[i][j] = 0.0;
-    }
+    novoObjeto->modelMatrix = criaIdentidade4d();
 
     return novoObjeto;
 }
@@ -58,6 +50,9 @@ void escalaObjeto(tObjeto3d *objeto, float escalaX, float escalaY, float escalaZ
 // Altera a modelMatrix de um objeto para translada-lo segundo os parâmetros transX, transY e transZ
 void transladaObjeto(tObjeto3d *objeto, float transX, float transY, float transZ)
 {
+    objeto->modelMatrix[0][3] += transX;
+    objeto->modelMatrix[1][3] += transY;
+    objeto->modelMatrix[2][3] += transZ;
 }
 
 // Altera a modelMatrix de um objeto para rotaciona-lo ao redor do eixo X segundo o angulo informado
@@ -87,12 +82,12 @@ void imprimeObjetoDBG(tObjeto3d *objeto)
     printf("Pontos:\n");
 
     for (int i = 0; i < objeto->nPontos; i++)
-        printf(" [%d] - (%8.4f, %8.4f, %8.4f)\n", i, objeto->pontos[i][0], objeto->pontos[i][1], objeto->pontos[i][2]);
+        printf(" [%d] - (%8.4f, %8.4f, %8.4f)\n", i + 1, objeto->pontos[i][0], objeto->pontos[i][1], objeto->pontos[i][2]);
 
     printf("Arestas\n");
 
     for (int i = 0; i < objeto->nArestas; i++)
-        printf(" [%d] - (%3d, %3d)\n", i, objeto->arestas[i][0], objeto->arestas[i][1]);
+        printf(" [%d] - (%3d, %3d)\n", i + 1, objeto->arestas[i][0], objeto->arestas[i][1]);
 }
 
 // Desaloca o objeto

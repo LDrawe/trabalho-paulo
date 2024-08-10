@@ -4,6 +4,7 @@
 
 #define WIDTH 800
 #define HEIGHT 600
+#define RUNNING 1
 
 //Aloca a tela utilizando o título passado como parâmetro e as largura e altura definidas no tela.h
 SDL_Window* criaTela(const char* titulo);

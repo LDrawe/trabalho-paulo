@@ -27,7 +27,7 @@ int main(int argc, char **argv)
     float **matriz = criaIdentidade4d();
     imprimeObjetoDBG(cubo);
 
-    while (1)
+    while (RUNNING)
     {
         if (SDL_PollEvent(&windowEvent))
         {
@@ -36,15 +36,38 @@ int main(int argc, char **argv)
                 break;
             }
         }
+
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
         SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
         // ESCREVA AQUI O SEU PROGRAMA
+        const Uint8 *state = SDL_GetKeyboardState(NULL);
+
+        if (state[SDL_SCANCODE_UP])
+        {
+            transladaObjeto(cubo, 0.0f, -0.05f, 0.0f);
+        }
+
+        if (state[SDL_SCANCODE_DOWN])
+        {
+            transladaObjeto(cubo, 0.0f, 0.05f, 0.0f);
+        }
+
+        if (state[SDL_SCANCODE_RIGHT])
+        {
+            transladaObjeto(cubo, 0.05f, 0.0f, 0.0f);
+        }
+
+        if (state[SDL_SCANCODE_LEFT])
+        {
+            transladaObjeto(cubo, -0.05f, 0.0f, 0.0f);
+        }
         
         desenhaObjetoTela(renderer, matriz, cubo);
 
         SDL_RenderPresent(renderer);
+        SDL_Delay(16);
     }
 
     desalocaObjeto(cubo);
