@@ -46,24 +46,34 @@ int main(int argc, char **argv)
 
         if (state[SDL_SCANCODE_UP])
         {
-            transladaObjeto(cubo, 0.0f, -0.05f, 0.0f);
+            transladaObjeto(cubo, 0.0f, -0.1f, 0.0f);
         }
 
         if (state[SDL_SCANCODE_DOWN])
         {
-            transladaObjeto(cubo, 0.0f, 0.05f, 0.0f);
+            transladaObjeto(cubo, 0.0f, 0.1f, 0.0f);
         }
 
         if (state[SDL_SCANCODE_RIGHT])
         {
-            transladaObjeto(cubo, 0.05f, 0.0f, 0.0f);
+            transladaObjeto(cubo, 0.1f, 0.0f, 0.0f);
         }
 
         if (state[SDL_SCANCODE_LEFT])
         {
-            transladaObjeto(cubo, -0.05f, 0.0f, 0.0f);
+            transladaObjeto(cubo, -0.1f, 0.0f, 0.0f);
         }
-        
+
+        if (state[SDL_SCANCODE_LCTRL] && state[SDL_SCANCODE_RIGHT])
+        {
+            escalaObjeto(cubo, 0.05f, 0.0f, 0.0f);
+        }
+
+        if (state[SDL_SCANCODE_LCTRL] && state[SDL_SCANCODE_LEFT])
+        {
+            escalaObjeto(cubo, -0.05f, 0.0f, 0.0f);
+        }
+
         desenhaObjetoTela(renderer, matriz, cubo);
 
         SDL_RenderPresent(renderer);

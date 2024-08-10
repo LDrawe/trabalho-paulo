@@ -45,6 +45,9 @@ tObjeto3d *carregaObjeto(const char *nomeArquivo)
 // Altera a modelMatrix de um objeto para redimenciona-lo segundo os parâmetros escalaX, escalaY e escalaZ
 void escalaObjeto(tObjeto3d *objeto, float escalaX, float escalaY, float escalaZ)
 {
+    objeto->modelMatrix[0][0] += escalaX;
+    objeto->modelMatrix[1][1] += escalaY;
+    objeto->modelMatrix[2][2] += escalaZ;
 }
 
 // Altera a modelMatrix de um objeto para translada-lo segundo os parâmetros transX, transY e transZ
