@@ -74,6 +74,16 @@ int main(int argc, char **argv)
             escalaObjeto(cubo, -0.05f, 0.0f, 0.0f);
         }
 
+        if (state[SDL_SCANCODE_LCTRL] && state[SDL_SCANCODE_UP])
+        {
+            escalaObjeto(cubo, 0.0f, 0.05f, 0.0f);
+        }
+
+        if (state[SDL_SCANCODE_LCTRL] && state[SDL_SCANCODE_DOWN])
+        {
+            escalaObjeto(cubo, 0.0f, -0.05f, 0.0f);
+        }
+
         desenhaObjetoTela(renderer, matriz, cubo);
 
         SDL_RenderPresent(renderer);
