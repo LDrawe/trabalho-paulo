@@ -13,7 +13,7 @@ SDL_Window* criaTela(const char* titulo);
 void desenhaArestaTela(SDL_Renderer* renderer, float* ponto1, float* ponto2);
 
 // Desenha um objeto inteiro na tela
-void desenhaObjetoTela(SDL_Renderer *renderer, float **matriz, tObjeto3d *objeto);
+void desenhaObjetoTela(SDL_Renderer *renderer, tObjeto3d *objeto);
 
 //Desaloca a tela
 void desalocaTela(SDL_Window* window);

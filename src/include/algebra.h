@@ -1,19 +1,17 @@
 #include <stdio.h>
 
-//Ajusta valores de um matriz 4d para uma matriz identidade
-float** criaIdentidade4d();
+// Ajusta valores de um matriz 4d para uma matriz identidade
+float **criaIdentidade4d();
 
-//Imprime uma matriz 4d no terminal
-void imprimeMatriz4dDBG(float** matriz);
+// Imprime uma matriz 4d no terminal
+void imprimeMatriz4dDBG(float **matriz);
 
-//Multiplica uma matriz 4d por um ponto
-float* multMatriz4dPonto(float** matriz, float* ponto);
+// Multiplica uma matriz 4d por um ponto
+float *multMatriz4dPonto(float **matriz, float *ponto);
 
-//Multiplica duas matrizes 4d salvando o resultado na segunda matriz
-void multMatriz4d(float** matrizA, float** matrizB);
+// Multiplica duas matrizes 4d salvando o resultado na segunda matriz
+void multMatriz4d(float **matrizA, float **matrizB);
 
-float** criaMatrizRotacaoX(float angulo);
-float** criaMatrizRotacaoY(float angulo);
-float** criaMatrizRotacaoZ(float angulo);
+float **criaMatrizRotacao(char eixo, float angulo);
 
-void limpaMatriz(float** matriz, int size);
+void limpaMatriz(float **matriz);

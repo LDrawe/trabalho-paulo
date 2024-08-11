@@ -24,14 +24,8 @@ void escalaObjeto(tObjeto3d *objeto, float escalaX, float escalaY, float escalaZ
 // Altera a modelMatrix de um objeto para translada-lo segundo os parâmetros transX, transY e transZ
 void transladaObjeto(tObjeto3d *objeto, float transX, float transY, float transZ);
 
-// Altera a modelMatrix de um objeto para rotaciona-lo ao redor do eixo X segundo o angulo informado
-void rotacionaObjetoEixoX(tObjeto3d *objeto, float angulo);
-
-// Altera a modelMatrix de um objeto para rotaciona-lo ao redor do eixo Y segundo o angulo informado
-void rotacionaObjetoEixoY(tObjeto3d *objeto, float angulo);
-
-// Altera a modelMatrix de um objeto para rotaciona-lo ao redor do eixo Z segundo o angulo informado
-void rotacionaObjetoEixoZ(tObjeto3d *objeto, float angulo);
+// Altera a modelMatrix de um objeto para rotaciona-lo ao redor do eixo desejado segundo o angulo informado
+void rotacionaObjeto(tObjeto3d *objeto, char eixo, float angulo);
 
 // Imprime um objeto no terminal
 void imprimeObjetoDBG(tObjeto3d *objeto);
