@@ -2,7 +2,6 @@
 #include <SDL2/SDL.h>
 #include "objeto.h"
 #include "algebra.h"
-
 // Lê as informações de um arquivo e as carrega num novo objeto alocado
 tObjeto3d *carregaObjeto(const char *nomeArquivo)
 {
@@ -41,7 +40,6 @@ tObjeto3d *carregaObjeto(const char *nomeArquivo)
 
     return novoObjeto;
 }
-
 // Altera a modelMatrix de um objeto para redimenciona-lo segundo os parâmetros escalaX, escalaY e escalaZ
 void escalaObjeto(tObjeto3d *objeto, float escalaX, float escalaY, float escalaZ)
 {
@@ -61,16 +59,37 @@ void transladaObjeto(tObjeto3d *objeto, float transX, float transY, float transZ
 // Altera a modelMatrix de um objeto para rotaciona-lo ao redor do eixo X segundo o angulo informado
 void rotacionaObjetoEixoX(tObjeto3d *objeto, float angulo)
 {
+    float rad = angulo * M_PI / 180.0; // Convertendo para radianos
+    float **matrizRotacaoX = criaMatrizRotacaoX(rad);
+
+    // Multiplicando a matriz de rotação pela matriz de modelo do objeto
+    // (Assumindo que a multiplicação é feita da direita para a esquerda)
+    multMatriz4d(matrizRotacaoX, objeto->modelMatrix);
+    limpaMatriz(matrizRotacaoX, 4);
 }
 
 // Altera a modelMatrix de um objeto para rotaciona-lo ao redor do eixo Y segundo o angulo informado
 void rotacionaObjetoEixoY(tObjeto3d *objeto, float angulo)
 {
+    float rad = angulo * M_PI / 180.0; // Convertendo para radianos
+    float **matrizRotacaoX = criaMatrizRotacaoY(rad);
+
+    // Multiplicando a matriz de rotação pela matriz de modelo do objeto
+    // (Assumindo que a multiplicação é feita da direita para a esquerda)
+    multMatriz4d(matrizRotacaoX, objeto->modelMatrix);
+    limpaMatriz(matrizRotacaoX, 4);
 }
 
 // Altera a modelMatrix de um objeto para rotaciona-lo ao redor do eixo Z segundo o angulo informado
 void rotacionaObjetoEixoZ(tObjeto3d *objeto, float angulo)
 {
+    float rad = angulo * M_PI / 180.0; // Convertendo para radianos
+    float **matrizRotacaoX = criaMatrizRotacaoZ(rad);
+
+    // Multiplicando a matriz de rotação pela matriz de modelo do objeto
+    // (Assumindo que a multiplicação é feita da direita para a esquerda)
+    multMatriz4d(matrizRotacaoX, objeto->modelMatrix);
+    limpaMatriz(matrizRotacaoX, 4);
 }
 
 // Imprime um objeto no terminal

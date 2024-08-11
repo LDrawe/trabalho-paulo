@@ -39,8 +39,6 @@ void desenhaObjetoTela(SDL_Renderer *renderer, float **matriz, tObjeto3d *objeto
         ponto2Index = objeto->arestas[i][1];
         ponto1 = multMatriz4dPonto(objeto->modelMatrix, objeto->pontos[ponto1Index]);
         ponto2 = multMatriz4dPonto(objeto->modelMatrix, objeto->pontos[ponto2Index]);
-        printf("ponto: %.2f %.2f %.2f\n", objeto->pontos[ponto1Index][0], objeto->pontos[ponto1Index][1], objeto->pontos[ponto1Index][2]);
-        printf("ponto multiplicado: %.2f %.2f %.2f %.2f\n", ponto1[0], ponto1[1], ponto1[2], ponto1[3]);
 
         desenhaArestaTela(renderer, ponto1, ponto2);
         free(ponto1);

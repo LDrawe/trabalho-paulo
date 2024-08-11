@@ -25,8 +25,6 @@ int main(int argc, char **argv)
     SDL_Event windowEvent;
     tObjeto3d *cubo = carregaObjeto("./src/assets/cubo.dcg");
     float **matriz = criaIdentidade4d();
-    imprimeObjetoDBG(cubo);
-
     while (RUNNING)
     {
         if (SDL_PollEvent(&windowEvent))
@@ -45,44 +43,46 @@ int main(int argc, char **argv)
         const Uint8 *state = SDL_GetKeyboardState(NULL);
 
         if (state[SDL_SCANCODE_UP])
-        {
             transladaObjeto(cubo, 0.0f, -0.1f, 0.0f);
-        }
 
         if (state[SDL_SCANCODE_DOWN])
-        {
             transladaObjeto(cubo, 0.0f, 0.1f, 0.0f);
-        }
 
         if (state[SDL_SCANCODE_RIGHT])
-        {
             transladaObjeto(cubo, 0.1f, 0.0f, 0.0f);
-        }
 
         if (state[SDL_SCANCODE_LEFT])
-        {
             transladaObjeto(cubo, -0.1f, 0.0f, 0.0f);
-        }
 
         if (state[SDL_SCANCODE_LCTRL] && state[SDL_SCANCODE_RIGHT])
-        {
             escalaObjeto(cubo, 0.05f, 0.0f, 0.0f);
-        }
 
         if (state[SDL_SCANCODE_LCTRL] && state[SDL_SCANCODE_LEFT])
-        {
             escalaObjeto(cubo, -0.05f, 0.0f, 0.0f);
-        }
 
         if (state[SDL_SCANCODE_LCTRL] && state[SDL_SCANCODE_UP])
-        {
             escalaObjeto(cubo, 0.0f, 0.05f, 0.0f);
-        }
 
         if (state[SDL_SCANCODE_LCTRL] && state[SDL_SCANCODE_DOWN])
-        {
             escalaObjeto(cubo, 0.0f, -0.05f, 0.0f);
-        }
+
+        if (state[SDL_SCANCODE_LSHIFT] && state[SDL_SCANCODE_UP])
+            rotacionaObjetoEixoX(cubo, 1.0f);
+        
+        if (state[SDL_SCANCODE_LSHIFT] && state[SDL_SCANCODE_DOWN])
+            rotacionaObjetoEixoX(cubo, -1.0f);
+        
+        if (state[SDL_SCANCODE_LSHIFT] && state[SDL_SCANCODE_RIGHT])
+            rotacionaObjetoEixoY(cubo, 1.0f);
+        
+        if (state[SDL_SCANCODE_LSHIFT] && state[SDL_SCANCODE_LEFT])
+            rotacionaObjetoEixoY(cubo, -1.0f);
+
+        if (state[SDL_SCANCODE_LALT] && state[SDL_SCANCODE_RIGHT])
+            rotacionaObjetoEixoZ(cubo, 1.0f);
+        
+        if (state[SDL_SCANCODE_LALT] && state[SDL_SCANCODE_LEFT])
+            rotacionaObjetoEixoZ(cubo, -1.0f);
 
         desenhaObjetoTela(renderer, matriz, cubo);
 

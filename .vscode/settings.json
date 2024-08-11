@@ -4,6 +4,8 @@
         "tela.h": "c",
         "algebra.h": "c",
         "stdio.h": "c",
-        "sdl.h": "c"
+        "sdl.h": "c",
+        "math.h": "c",
+        "stdlib.h": "c"
     }
 }
