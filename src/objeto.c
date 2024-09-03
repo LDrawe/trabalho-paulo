@@ -37,11 +37,28 @@ tObjeto3d *carregaObjeto(const char *nomeArquivo)
     return novoObjeto;
 }
 
-void escalaObjeto(tObjeto3d *objeto, float escalaX, float escalaY, float escalaZ)
+void escalaObjeto(tObjeto3d *objeto, float scale)
 {
-    objeto->modelMatrix[0][0] += escalaX;
-    objeto->modelMatrix[1][1] += escalaY;
-    objeto->modelMatrix[2][2] += escalaZ;
+    static float escala = 1.0;
+
+    if (scale == 1.0) {
+        escala = 1.0;
+        return;
+    }
+
+    if (escala < 0.1 && scale < 0) return;
+    if (escala > 1.5 && scale > 0) return;
+    
+    escala += scale;
+    
+    float** matrizEscala = criaIdentidade4d();
+
+    matrizEscala[0][0] = 1 + scale;
+    matrizEscala[1][1] = 1 + scale;
+    matrizEscala[2][2] = 1 + scale;
+
+    multMatriz4d(matrizEscala, objeto->modelMatrix);
+    limpaMatriz(matrizEscala);
 }
 
 void transladaObjeto(tObjeto3d *objeto, float transX, float transY, float transZ)
@@ -56,6 +73,11 @@ void rotacionaObjeto(tObjeto3d *objeto, char eixo, float angulo)
     float **matrizRotacao = criaMatrizRotacao(eixo, angulo * M_PI / 180.0);
     multMatriz4d(matrizRotacao, objeto->modelMatrix);
     limpaMatriz(matrizRotacao);
+}
+
+void resetaObjeto(tObjeto3d* obj) {
+    limpaMatriz(obj->modelMatrix);
+    obj->modelMatrix = criaIdentidade4d();
 }
 
 void imprimeObjetoDBG(tObjeto3d *objeto)

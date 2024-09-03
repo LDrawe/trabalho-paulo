@@ -19,13 +19,16 @@ extern float **matrizRotacaoX, **matrizRotacaoY, **matrizRotacaoZ;
 tObjeto3d *carregaObjeto(const char *nomeArquivo);
 
 // Altera a modelMatrix de um objeto para redimenciona-lo segundo os parâmetros escalaX, escalaY e escalaZ
-void escalaObjeto(tObjeto3d *objeto, float escalaX, float escalaY, float escalaZ);
+void escalaObjeto(tObjeto3d *objeto, float escala);
 
 // Altera a modelMatrix de um objeto para translada-lo segundo os parâmetros transX, transY e transZ
 void transladaObjeto(tObjeto3d *objeto, float transX, float transY, float transZ);
 
 // Altera a modelMatrix de um objeto para rotaciona-lo ao redor do eixo desejado segundo o angulo informado
 void rotacionaObjeto(tObjeto3d *objeto, char eixo, float angulo);
+
+//Reseta todas as alterações feitas no objeto
+void resetaObjeto(tObjeto3d* obj);
 
 // Imprime um objeto no terminal
 void imprimeObjetoDBG(tObjeto3d *objeto);
