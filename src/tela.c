@@ -24,15 +24,27 @@ void desenhaArestaTela(SDL_Renderer *renderer, float *ponto1, float *ponto2)
 
 void desenhaObjetoTela(SDL_Renderer *renderer, tObjeto3d *objeto)
 {
+    // Precompute all transformed points
+    float **pontosTransformados = (float **)malloc(objeto->nPontos * sizeof(float *));
+    for (int i = 0; i < objeto->nPontos; i++)
+    {
+        pontosTransformados[i] = multMatriz4dPonto(objeto->modelMatrix, objeto->pontos[i]);
+    }
+
+    // Draw edges using precomputed points
     for (int i = 0; i < objeto->nArestas; i++)
     {
-        float *ponto1 = multMatriz4dPonto(objeto->modelMatrix, objeto->pontos[objeto->arestas[i][0]]);
-        float *ponto2 = multMatriz4dPonto(objeto->modelMatrix, objeto->pontos[objeto->arestas[i][1]]);
+        float *ponto1 = pontosTransformados[objeto->arestas[i][0]];
+        float *ponto2 = pontosTransformados[objeto->arestas[i][1]];
 
         desenhaArestaTela(renderer, ponto1, ponto2);
-        free(ponto1);
-        free(ponto2);
     }
+
+    for (int i = 0; i < objeto->nPontos; i++)
+    {
+        free(pontosTransformados[i]);
+    }
+    free(pontosTransformados);
 }
 
 // Desaloca a tela
