@@ -10,7 +10,7 @@ float **criaIdentidade4d()
         matriz[i] = (float *)calloc(4, sizeof(float));
         matriz[i][i] = 1.0f;
     }
-    
+
     return matriz;
 }
 
@@ -61,27 +61,28 @@ float **criaMatrizRotacao(char eixo, float angulo)
     float c = cos(angulo);
     float s = sin(angulo);
 
-    switch (eixo) {
-        case 'X':
-            matriz[1][1] = c;
-            matriz[1][2] = -s;
-            matriz[2][1] = s;
-            matriz[2][2] = c;
-            break;
-        case 'Y':
-            matriz[0][0] = c;
-            matriz[0][2] = s;
-            matriz[2][0] = -s;
-            matriz[2][2] = c;
-            break;
-        case 'Z':
-            matriz[0][0] = c;
-            matriz[0][1] = -s;
-            matriz[1][0] = s;
-            matriz[1][1] = c;
-            break;
+    switch (eixo)
+    {
+    case 'X':
+        matriz[1][1] = c;
+        matriz[1][2] = -s;
+        matriz[2][1] = s;
+        matriz[2][2] = c;
+        break;
+    case 'Y':
+        matriz[0][0] = c;
+        matriz[0][2] = s;
+        matriz[2][0] = -s;
+        matriz[2][2] = c;
+        break;
+    case 'Z':
+        matriz[0][0] = c;
+        matriz[0][1] = -s;
+        matriz[1][0] = s;
+        matriz[1][1] = c;
+        break;
     }
-    
+
     return matriz;
 }
 

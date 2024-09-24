@@ -41,17 +41,20 @@ void escalaObjeto(tObjeto3d *objeto, float scale)
 {
     static float escala = 1.0;
 
-    if (scale == 1.0) {
+    if (scale == 1.0)
+    {
         escala = 1.0;
         return;
     }
 
-    if (escala < 0.1 && scale < 0) return;
-    if (escala > 1.5 && scale > 0) return;
-    
+    if (escala < 0.1 && scale < 0)
+        return;
+    if (escala > 1.5 && scale > 0)
+        return;
+
     escala += scale;
-    
-    float** matrizEscala = criaIdentidade4d();
+
+    float **matrizEscala = criaIdentidade4d();
 
     matrizEscala[0][0] = 1 + scale;
     matrizEscala[1][1] = 1 + scale;
@@ -75,7 +78,8 @@ void rotacionaObjeto(tObjeto3d *objeto, char eixo, float angulo)
     limpaMatriz(matrizRotacao);
 }
 
-void resetaObjeto(tObjeto3d* obj) {
+void resetaObjeto(tObjeto3d *obj)
+{
     limpaMatriz(obj->modelMatrix);
     obj->modelMatrix = criaIdentidade4d();
 }

@@ -1,5 +1,15 @@
 #include <stdio.h>
 
+#ifndef _Vetor
+#define _Vetor
+typedef struct Vetor
+{
+    float x;
+    float y;
+    float z;
+} Vetor;
+#endif
+
 // Ajusta valores de um matriz 4d para uma matriz identidade
 float **criaIdentidade4d();
 
