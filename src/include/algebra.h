@@ -24,4 +24,12 @@ void multMatriz4d(float **matrizA, float **matrizB);
 
 float **criaMatrizRotacao(char eixo, float angulo);
 
+Vetor normaliza(Vetor v);
+
+Vetor produtoVetorial(Vetor v1, Vetor v2);
+
+double produtoEscalar(Vetor v1, Vetor v2);
+
+Vetor subtraiVetor(Vetor v1, Vetor v2);
+
 void limpaMatriz(float **matriz);

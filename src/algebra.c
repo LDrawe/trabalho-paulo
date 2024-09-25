@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include "algebra.h"
 
 float **criaIdentidade4d()
 {
@@ -84,6 +85,47 @@ float **criaMatrizRotacao(char eixo, float angulo)
     }
 
     return matriz;
+}
+
+Vetor normaliza(Vetor v) {
+    double magnitude = sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
+
+    // Avoid division by zero
+    if (magnitude == 0) {
+        Vetor zeroVector = {0, 0, 0};
+        return zeroVector;
+    }
+
+    Vetor result;
+    result.x = v.x / magnitude;
+    result.y = v.y / magnitude;
+    result.z = v.z / magnitude;
+
+    return result;
+}
+
+Vetor produtoVetorial(Vetor v1, Vetor v2) {
+    Vetor result;
+
+    result.x = v1.y * v2.z - v1.z * v2.y;
+    result.y = v1.z * v2.x - v1.x * v2.z;
+    result.z = v1.x * v2.y - v1.y * v2.x;
+
+    return result;
+}
+
+double produtoEscalar(Vetor v1, Vetor v2) {
+    return (v1.x * v2.x) + (v1.y * v2.y) + (v1.z * v2.z);
+}
+
+Vetor subtraiVetor(Vetor v1, Vetor v2) {
+    Vetor result;
+
+    result.x = v1.x - v2.x;
+    result.y = v1.y - v2.y;
+    result.z = v1.z - v2.z;
+
+    return result;
 }
 
 void limpaMatriz(float **matriz)

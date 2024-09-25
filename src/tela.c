@@ -47,6 +47,20 @@ void desenhaObjetoTela(SDL_Renderer *renderer, tObjeto3d *objeto)
     free(pontosTransformados);
 }
 
+// Função para renderizar o objeto na tela
+void renderiza(SDL_Renderer *renderer, tObjeto3d *cubo)
+{
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_RenderClear(renderer);
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+
+    desenhaObjetoTela(renderer, cubo);
+
+    SDL_Delay(16);
+
+    SDL_RenderPresent(renderer);
+}
+
 // Desaloca a tela
 void desalocaTela(SDL_Window *window)
 {
