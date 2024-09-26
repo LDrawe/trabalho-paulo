@@ -33,3 +33,5 @@ tProj* criaProjecao(int tipo, float left, float right, float top, float bottom, 
 void defineProjecao(tProj *proj);
 
 void desalocaCamera(tCamera *camera);
+
+void desalocaProjecao(tProj *proj);

@@ -40,6 +40,8 @@ int main(int argc, char **argv)
 
     desalocaObjeto(cubo);
     desalocaTela(window);
+    desalocaCamera(camera);
+    desalocaProjecao(proj);
     SDL_Quit();
 
     return EXIT_SUCCESS;

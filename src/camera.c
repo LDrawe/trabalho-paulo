@@ -104,3 +104,18 @@ void desalocaCamera(tCamera *camera)
     limpaMatriz(camera->viewMatrix);
     free(camera);
 }
+
+void desalocaProjecao(tProj *proj) {
+    if (proj == NULL) return;
+
+    // Free the 4x4 projection matrix
+    if (proj->projectionMatrix != NULL) {
+        for (int i = 0; i < 4; i++) {
+            free(proj->projectionMatrix[i]);
+        }
+        free(proj->projectionMatrix);
+    }
+
+    // Free the projection struct
+    free(proj);
+}
