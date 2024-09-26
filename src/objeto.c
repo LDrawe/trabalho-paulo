@@ -66,9 +66,13 @@ void escalaObjeto(tObjeto3d *objeto, float scale)
 
 void transladaObjeto(tObjeto3d *objeto, float transX, float transY, float transZ)
 {
-    objeto->modelMatrix[0][3] += transX;
-    objeto->modelMatrix[1][3] += transY;
-    objeto->modelMatrix[2][3] += transZ;
+    float **matrizTranslacao = criaIdentidade4d();
+
+    matrizTranslacao[0][3] += transX;
+    matrizTranslacao[1][3] += transY;
+    matrizTranslacao[2][3] += transZ;
+    
+    multMatriz4d(matrizTranslacao, objeto->modelMatrix);
 }
 
 void rotacionaObjeto(tObjeto3d *objeto, char eixo, float angulo)
