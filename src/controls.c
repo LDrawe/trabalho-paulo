@@ -8,17 +8,23 @@ void processaInput(tObjeto3d *cubo)
     if (state[SDL_SCANCODE_R])
         resetaObjeto(cubo);
 
-    if (state[SDL_SCANCODE_UP] && !state[SDL_SCANCODE_LSHIFT] && !state[SDL_SCANCODE_LALT])
+    if (state[SDL_SCANCODE_UP] && !state[SDL_SCANCODE_LCTRL] && !state[SDL_SCANCODE_LSHIFT] && !state[SDL_SCANCODE_LALT])
         transladaObjeto(cubo, 0.0f, -0.1f, 0.0f);
 
-    if (state[SDL_SCANCODE_DOWN] && !state[SDL_SCANCODE_LSHIFT] && !state[SDL_SCANCODE_LALT])
+    if (state[SDL_SCANCODE_DOWN] && !state[SDL_SCANCODE_LCTRL] && !state[SDL_SCANCODE_LSHIFT] && !state[SDL_SCANCODE_LALT])
         transladaObjeto(cubo, 0.0f, 0.1f, 0.0f);
 
-    if (state[SDL_SCANCODE_RIGHT] && !state[SDL_SCANCODE_LSHIFT] && !state[SDL_SCANCODE_LALT])
+    if (state[SDL_SCANCODE_RIGHT] && !state[SDL_SCANCODE_LCTRL] && !state[SDL_SCANCODE_LSHIFT] && !state[SDL_SCANCODE_LALT])
         transladaObjeto(cubo, 0.1f, 0.0f, 0.0f);
 
-    if (state[SDL_SCANCODE_LEFT] && !state[SDL_SCANCODE_LSHIFT] && !state[SDL_SCANCODE_LALT])
+    if (state[SDL_SCANCODE_LEFT] && !state[SDL_SCANCODE_LCTRL] && !state[SDL_SCANCODE_LSHIFT] && !state[SDL_SCANCODE_LALT])
         transladaObjeto(cubo, -0.1f, 0.0f, 0.0f);
+
+    if (state[SDL_SCANCODE_UP] && state[SDL_SCANCODE_LCTRL] && !state[SDL_SCANCODE_LSHIFT] && !state[SDL_SCANCODE_LALT])
+        transladaObjeto(cubo, 0.0f, 0.0f, -0.1f);
+
+    if (state[SDL_SCANCODE_DOWN] && state[SDL_SCANCODE_LCTRL] && !state[SDL_SCANCODE_LSHIFT] && !state[SDL_SCANCODE_LALT])
+        transladaObjeto(cubo, 0.0f, 0.0f, 0.1f);
 
     if (state[SDL_SCANCODE_KP_PLUS])
         escalaObjeto(cubo, 0.02f);
