@@ -22,13 +22,32 @@ void desenhaArestaTela(SDL_Renderer *renderer, float *ponto1, float *ponto2)
     SDL_RenderDrawLine(renderer, x1, y1, x2, y2);
 }
 
-void desenhaObjetoTela(SDL_Renderer *renderer, tObjeto3d *objeto)
+void desenhaObjetoTela(SDL_Renderer *renderer, tObjeto3d *objeto, float **viewMatrix, float **projectionMatrix)
 {
-    // Precompute all transformed points
+    // Precompute all transformed points (modelMatrix * viewMatrix * projectionMatrix * vertex)
     float **pontosTransformados = (float **)malloc(objeto->nPontos * sizeof(float *));
     for (int i = 0; i < objeto->nPontos; i++)
     {
-        pontosTransformados[i] = multMatriz4dPonto(objeto->modelMatrix, objeto->pontos[i]);
+        // Apply model matrix first
+        float *pontoModel = multMatriz4dPonto(objeto->modelMatrix, objeto->pontos[i]);
+
+        // Then apply the view matrix (camera transformation)
+        float *pontoView = multMatriz4dPonto(viewMatrix, pontoModel);
+        
+        // Finally apply the projection matrix (perspective transformation)
+        float *pontoProj = multMatriz4dPonto(projectionMatrix, pontoView);
+
+        // Normalize homogeneous coordinates (divide by w)
+        for (int j = 0; j < 3; j++)
+        {
+            pontoProj[j] /= pontoProj[3];  // Perspective division
+        }
+
+        pontosTransformados[i] = pontoProj;
+        
+        // Free intermediate results
+        free(pontoModel);
+        free(pontoView);
     }
 
     // Draw edges using precomputed points
@@ -40,6 +59,7 @@ void desenhaObjetoTela(SDL_Renderer *renderer, tObjeto3d *objeto)
         desenhaArestaTela(renderer, ponto1, ponto2);
     }
 
+    // Free memory for transformed points
     for (int i = 0; i < objeto->nPontos; i++)
     {
         free(pontosTransformados[i]);
@@ -48,16 +68,15 @@ void desenhaObjetoTela(SDL_Renderer *renderer, tObjeto3d *objeto)
 }
 
 // Função para renderizar o objeto na tela
-void renderiza(SDL_Renderer *renderer, tObjeto3d *cubo)
+void renderiza(SDL_Renderer *renderer, tObjeto3d *cubo, float **viewMatrix, float **projectionMatrix)
 {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
-    desenhaObjetoTela(renderer, cubo);
+    desenhaObjetoTela(renderer, cubo, viewMatrix, projectionMatrix);
 
     SDL_Delay(16);
-
     SDL_RenderPresent(renderer);
 }
 

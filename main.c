@@ -4,6 +4,7 @@
 #include "controls.h"
 #include "objeto.h"
 #include "tela.h"
+#include "camera.h"
 
 int main(int argc, char **argv)
 {
@@ -25,13 +26,16 @@ int main(int argc, char **argv)
     SDL_Event windowEvent;
     tObjeto3d *cubo = carregaObjeto("./src/assets/cubo.dcg");
 
+    tCamera *camera = criaCamera();
+    tProj *proj = criaProjecao(1, -1.0f, 1.0f, -1.0f, 1.0f, 0.1f, 100.0f);
+
     while (RUNNING)
     {
         if (SDL_PollEvent(&windowEvent) && windowEvent.type == SDL_QUIT)
             break;
 
         processaInput(cubo);
-        renderiza(renderer, cubo);
+        renderiza(renderer, cubo, camera->viewMatrix, proj->projectionMatrix);
     }
 
     desalocaObjeto(cubo);

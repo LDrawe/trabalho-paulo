@@ -63,6 +63,8 @@ tProj* criaProjecao(int tipo, float left, float right, float top, float bottom, 
         proj->projectionMatrix[i] = (float*) malloc(4 * sizeof(float));
     }
 
+    defineProjecao(proj);
+
     return proj;
 }
 
