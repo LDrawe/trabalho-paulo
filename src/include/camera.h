@@ -11,6 +11,23 @@ typedef struct tCam
 } tCamera;
 #endif
 
+#ifndef _tProj
+#define _tProj
+typedef struct _tProj
+{
+    int tipo;
+    float left;
+    float right;
+    float top;
+    float bottom;
+    float near;
+    float far;
+    float **projectionMatrix;
+} tProj;
+#endif
+
 tCamera *criaCamera();
 
-void desalocaCamera(tCamera* camera);
+tProj* criaProjecao(int tipo, float left, float right, float top, float bottom, float near, float far);
+
+void desalocaCamera(tCamera *camera);
