@@ -30,22 +30,11 @@ void desenhaObjetoTela(SDL_Renderer *renderer, tObjeto3d *objeto, float **viewMa
     {
         // Apply model matrix first
         float *pontoModel = multMatriz4dPonto(objeto->modelMatrix, objeto->pontos[i]);
-
-        // Then apply the view matrix (camera transformation)
         float *pontoView = multMatriz4dPonto(viewMatrix, pontoModel);
-        
-        // Finally apply the projection matrix (perspective transformation)
         float *pontoProj = multMatriz4dPonto(projectionMatrix, pontoView);
-
-        // Normalize homogeneous coordinates (divide by w)
-        for (int j = 0; j < 3; j++)
-        {
-            pontoProj[j] /= pontoProj[3];  // Perspective division
-        }
 
         pontosTransformados[i] = pontoProj;
         
-        // Free intermediate results
         free(pontoModel);
         free(pontoView);
     }
@@ -59,7 +48,6 @@ void desenhaObjetoTela(SDL_Renderer *renderer, tObjeto3d *objeto, float **viewMa
         desenhaArestaTela(renderer, ponto1, ponto2);
     }
 
-    // Free memory for transformed points
     for (int i = 0; i < objeto->nPontos; i++)
     {
         free(pontosTransformados[i]);
@@ -68,13 +56,21 @@ void desenhaObjetoTela(SDL_Renderer *renderer, tObjeto3d *objeto, float **viewMa
 }
 
 // Função para renderizar o objeto na tela
-void renderiza(SDL_Renderer *renderer, tObjeto3d *cubo, float **viewMatrix, float **projectionMatrix)
+void renderiza(SDL_Renderer *renderer, tObjeto3d **objetos, float **viewMatrix, float **projectionMatrix)
 {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
-    desenhaObjetoTela(renderer, cubo, viewMatrix, projectionMatrix);
+    // Desenha o plano em amarelo
+    SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+    desenhaObjetoTela(renderer, objetos[0], viewMatrix, projectionMatrix);
+    
+    // Desenha os objetos em branco
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    for (int i = 1; i < 2; i++)
+    {
+        desenhaObjetoTela(renderer, objetos[i], viewMatrix, projectionMatrix);
+    }
 
     SDL_Delay(16);
     SDL_RenderPresent(renderer);

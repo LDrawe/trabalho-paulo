@@ -52,6 +52,18 @@ void defineCamera(tCamera *camera)
     camera->viewMatrix[3][3] = 1;
 }
 
+void rotacionaCamera(tCamera *camera, float angle, Vetor eixo)
+{
+    // Get the direction vector (focus - position)
+    Vetor direcao = subtraiVetor(camera->foco, camera->posicao);
+    
+    // Rotate the direction vector around the specified axis (e.g., camera->cima)
+    direcao = rotacionaVetor(direcao, eixo, angle);
+    
+    // Update the camera's focus point
+    camera->foco = somaVetor(camera->posicao, direcao);
+}
+
 tProj *criaProjecao(int tipo, float left, float right, float top, float bottom, float near, float far)
 {
     tProj *proj = (tProj *)malloc(sizeof(tProj));
@@ -122,14 +134,7 @@ void desalocaProjecao(tProj *proj)
     if (proj == NULL)
         return;
 
-    if (proj->projectionMatrix != NULL)
-    {
-        for (int i = 0; i < 4; i++)
-        {
-            free(proj->projectionMatrix[i]);
-        }
-        free(proj->projectionMatrix);
-    }
+    limpaMatriz(proj->projectionMatrix);
 
     free(proj);
 }

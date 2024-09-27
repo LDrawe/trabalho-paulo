@@ -71,7 +71,7 @@ void transladaObjeto(tObjeto3d *objeto, float transX, float transY, float transZ
     matrizTranslacao[0][3] += transX;
     matrizTranslacao[1][3] += transY;
     matrizTranslacao[2][3] += transZ;
-    
+
     multMatriz4d(matrizTranslacao, objeto->modelMatrix);
 }
 
@@ -105,22 +105,30 @@ void imprimeObjetoDBG(tObjeto3d *objeto)
         printf(" [%d] - (%3d, %3d)\n", i + 1, objeto->arestas[i][0], objeto->arestas[i][1]);
 }
 
-void desalocaObjeto(tObjeto3d *objeto)
+void desalocaObjetos(tObjeto3d **objetos, int count)
 {
-    if (!objeto)
+    if (!objetos)
     {
-        perror("Erro: objeto nulo");
+        perror("Erro: array de objetos nulo");
         return;
     }
 
-    for (int i = 0; i < objeto->nPontos; i++)
-        free(objeto->pontos[i]);
-    free(objeto->pontos);
+    for (int i = 0; i < count - 1; i++)
+    {
+        if (objetos[i]) // Check if the object is not null
+        {
+            for (int i = 0; i < objetos[i]->nPontos; i++)
+                free(objetos[i]->pontos[i]);
+            free(objetos[i]->pontos);
 
-    for (int i = 0; i < objeto->nArestas; i++)
-        free(objeto->arestas[i]);
-    free(objeto->arestas);
+            for (int i = 0; i < objetos[i]->nArestas; i++)
+                free(objetos[i]->arestas[i]);
+            free(objetos[i]->arestas);
 
-    limpaMatriz(objeto->modelMatrix);
-    free(objeto);
+            limpaMatriz(objetos[i]->modelMatrix);
+            free(objetos[i]);
+        }
+    }
+
+    free(objetos); // Free the array of pointers
 }

@@ -28,12 +28,14 @@ typedef struct _tProj
 
 tCamera *criaCamera();
 
+void defineCamera(tCamera *camera);
+
+void rotacionaCamera(tCamera *camera, float angle, Vetor eixo);
+
 tProj* criaProjecao(int tipo, float left, float right, float top, float bottom, float near, float far);
 
 void defineProjecao(tProj *proj);
 
 void desalocaCamera(tCamera *camera);
-
-void defineCamera(tCamera *camera);
 
 void desalocaProjecao(tProj *proj);

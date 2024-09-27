@@ -33,5 +33,5 @@ void resetaObjeto(tObjeto3d* obj);
 // Imprime um objeto no terminal
 void imprimeObjetoDBG(tObjeto3d *objeto);
 
-// Desaloca o objeto
-void desalocaObjeto(tObjeto3d *objeto);
+// Desaloca os objetos
+void desalocaObjetos(tObjeto3d **objetos, int count);

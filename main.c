@@ -24,7 +24,10 @@ int main(int argc, char **argv)
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, 0);
 
     SDL_Event windowEvent;
-    tObjeto3d *cubo = carregaObjeto("./src/assets/cubo.dcg");
+    tObjeto3d **objetos = (tObjeto3d **)malloc(2 * sizeof(tObjeto3d *));
+
+    objetos[0] = carregaObjeto("./src/assets/plano.dcg");
+    objetos[1] = carregaObjeto("./src/assets/cubo.dcg");
 
     tCamera *camera = criaCamera();
     tProj *proj = criaProjecao(1, -1.0f, 1.0f, -1.0f, 1.0f, 0.1f, 100.0f);
@@ -34,11 +37,11 @@ int main(int argc, char **argv)
         if (SDL_PollEvent(&windowEvent) && windowEvent.type == SDL_QUIT)
             break;
 
-        processaInput(camera, cubo);
-        renderiza(renderer, cubo, camera->viewMatrix, proj->projectionMatrix);
+        processaInput(camera, objetos[0]);
+        renderiza(renderer, objetos, camera->viewMatrix, proj->projectionMatrix);
     }
 
-    desalocaObjeto(cubo);
+    desalocaObjetos(objetos, 2);
     desalocaTela(window);
     desalocaCamera(camera);
     desalocaProjecao(proj);

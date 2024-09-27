@@ -144,6 +144,25 @@ Vetor subtraiVetor(Vetor v1, Vetor v2) {
     return result;
 }
 
+Vetor rotacionaVetor(Vetor v, Vetor eixo, float angulo)
+{
+    // Normaliza o eixo de rotação
+    eixo = normaliza(eixo);
+
+    // Converte o ângulo de graus para radianos
+    float rad = angulo * (3.14 / 180.0f);
+
+    Vetor parte1 = escalaVetor(v, cos(rad));
+    
+    Vetor parte2 = escalaVetor(produtoVetorial(eixo, v), sin(rad));
+    
+    Vetor parte3 = escalaVetor(eixo, produtoEscalar(eixo, v) * (1 - cos(rad)));
+
+    Vetor resultado = somaVetor(somaVetor(parte1, parte2), parte3);
+
+    return resultado;
+}
+
 void limpaMatriz(float **matriz)
 {
     for (int i = 0; i < 4; i++)

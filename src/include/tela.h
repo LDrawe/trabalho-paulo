@@ -16,7 +16,7 @@ void desenhaArestaTela(SDL_Renderer *renderer, float *ponto1, float *ponto2);
 void desenhaObjetoTela(SDL_Renderer *renderer, tObjeto3d *objeto, float **viewMatrix, float **projectionMatrix);
 
 // Função para renderizar o objeto na tela
-void renderiza(SDL_Renderer *renderer, tObjeto3d *cubo, float **viewMatrix, float **projectionMatrix);
+void renderiza(SDL_Renderer *renderer, tObjeto3d **objetos, float **viewMatrix, float **projectionMatrix);
 
 // Desaloca a tela
 void desalocaTela(SDL_Window *window);

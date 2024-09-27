@@ -37,4 +37,6 @@ double produtoEscalar(Vetor v1, Vetor v2);
 
 Vetor subtraiVetor(Vetor v1, Vetor v2);
 
+Vetor rotacionaVetor(Vetor v, Vetor eixo, float angulo);
+
 void limpaMatriz(float **matriz);
