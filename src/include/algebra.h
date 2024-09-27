@@ -7,6 +7,7 @@ typedef struct Vetor
     float x;
     float y;
     float z;
+    float w;
 } Vetor;
 #endif
 
@@ -26,7 +27,11 @@ float **criaMatrizRotacao(char eixo, float angulo);
 
 Vetor normaliza(Vetor v);
 
+Vetor somaVetor(Vetor v1, Vetor v2);
+
 Vetor produtoVetorial(Vetor v1, Vetor v2);
+
+Vetor escalaVetor(Vetor v, float escalar);
 
 double produtoEscalar(Vetor v1, Vetor v2);
 

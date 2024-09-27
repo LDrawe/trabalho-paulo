@@ -90,9 +90,8 @@ float **criaMatrizRotacao(char eixo, float angulo)
 Vetor normaliza(Vetor v) {
     double magnitude = sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
 
-    // Avoid division by zero
     if (magnitude == 0) {
-        Vetor zeroVector = {0, 0, 0};
+        Vetor zeroVector = {0, 0, 0, 0};
         return zeroVector;
     }
 
@@ -104,6 +103,14 @@ Vetor normaliza(Vetor v) {
     return result;
 }
 
+Vetor somaVetor(Vetor v1, Vetor v2) {
+    Vetor resultado;
+    resultado.x = v1.x + v2.x;
+    resultado.y = v1.y + v2.y;
+    resultado.z = v1.z + v2.z;
+    return resultado;
+}
+
 Vetor produtoVetorial(Vetor v1, Vetor v2) {
     Vetor result;
 
@@ -112,6 +119,15 @@ Vetor produtoVetorial(Vetor v1, Vetor v2) {
     result.z = v1.x * v2.y - v1.y * v2.x;
 
     return result;
+}
+
+Vetor escalaVetor(Vetor v, float escalar) {
+    Vetor resultado;
+    resultado.x = v.x * escalar;
+    resultado.y = v.y * escalar;
+    resultado.z = v.z * escalar;
+
+    return resultado;
 }
 
 double produtoEscalar(Vetor v1, Vetor v2) {

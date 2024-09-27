@@ -34,4 +34,6 @@ void defineProjecao(tProj *proj);
 
 void desalocaCamera(tCamera *camera);
 
+void defineCamera(tCamera *camera);
+
 void desalocaProjecao(tProj *proj);

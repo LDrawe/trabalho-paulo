@@ -34,7 +34,7 @@ int main(int argc, char **argv)
         if (SDL_PollEvent(&windowEvent) && windowEvent.type == SDL_QUIT)
             break;
 
-        processaInput(cubo);
+        processaInput(camera, cubo);
         renderiza(renderer, cubo, camera->viewMatrix, proj->projectionMatrix);
     }
 
